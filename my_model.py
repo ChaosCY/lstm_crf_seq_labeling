@@ -55,6 +55,7 @@ class Model():
 			
 			self.predict_sequence, _ = tf.contrib.crf.crf_decode(y_scores, transition_params, self.seq_len)
 		else:
+			#这里输入应该是logits
 			cost = tf.nn.softmax_cross_entropy_with_logits(logits=y, labels=y_)
 			cost = tf.reshape(cost, [-1, tf.reduce_max(self.seq_len)])
 			self.loss = tf.reduce_mean(tf.reduce_sum(cost, 1))
